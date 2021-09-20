@@ -1,38 +1,62 @@
-.App {
-  text-align: center;
+*{
+  margin:0px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* HOMEPAGE */
+
+.homepage{
+  display:grid;
+  place-items:center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.homepage-container{
+  width: 90%;
+}
+.map-container{
+  display:grid;
+  place-items:center;
+}
+.map{
+  border: solid;
+  height: 400px;
+  width: 500px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.categories{
+  padding-top: 30px;
 }
 
-.App-link {
-  color: #61dafb;
+.category-title{
+  padding-bottom:10px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.category-tiles{
+  display:grid;
+  grid-auto-flow: column;
+}
+
+.category-tile{
+  border: solid 1px;
+  width: 110px;
+  border-radius: 5px;
+  padding: 3px;
+}
+
+.best-deals{
+  padding: 20px 0px;
+}
+
+.deal-tiles{
+  display:grid;
+  grid-auto-flow:column;
+}
+
+.best-deals-title{
+  padding: 10px 0px; 
+}
+
+.deal-tile{
+  height: 120px;
+  border: 1px solid;
+  width: 120px;
 }
