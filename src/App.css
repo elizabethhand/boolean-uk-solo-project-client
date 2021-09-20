@@ -15,6 +15,7 @@
 .map-container{
   display:grid;
   place-items:center;
+  padding: 40px 0px;
 }
 .map{
   border: solid;
@@ -24,10 +25,11 @@
 
 .categories{
   padding-top: 30px;
+  
 }
 
 .category-title{
-  padding-bottom:10px;
+  padding-bottom:20px;
 }
 
 .category-tiles{
@@ -52,11 +54,27 @@
 }
 
 .best-deals-title{
-  padding: 10px 0px; 
+  padding: 20px 0px; 
 }
 
 .deal-tile{
   height: 120px;
   border: 1px solid;
   width: 120px;
+}
+
+.header{
+  display:flex;
+  justify-content:space-between;
+  padding: 20px 10px;
+}
+
+.header-links{
+  display:grid;
+  grid-auto-flow: column;
+  place-items:center;
+}
+
+.header-link{
+  width: 60px;
 }
