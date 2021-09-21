@@ -12,11 +12,20 @@
 .homepage-container{
   width: 90%;
 }
-.map-container{
+.map-display-container{
   display:grid;
   place-items:center;
   padding: 40px 0px;
 }
+
+.map-container{
+  border:solid;
+}
+
+.map-display{
+  width: 400px;
+}
+
 .map{
   border: solid;
   height: 400px;
