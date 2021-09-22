@@ -59,7 +59,7 @@
 
 .deal-tiles{
   display:grid;
-  grid-auto-flow:column;
+  grid-template-columns: repeat( 6, 150px);
 }
 
 .best-deals-title{

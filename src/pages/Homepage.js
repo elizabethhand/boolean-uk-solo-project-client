@@ -1,6 +1,8 @@
 import React, { useRef, useEffect, useState } from "react"
 import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl';
 import mapboxgl from 'mapbox-gl';
+import CategoryTile from "../components/CategoryTile"
+import DealTile from "../components/DealTile"
 
 mapboxgl.accessToken = 'pk.eyJ1IjoibGl6emllaGFuZCIsImEiOiJja3RvaGRnaGEwY3NqMm9ueTFxcWNhdDh5In0.kinvaFf_wJwiFsHBbZRzwA';
 
@@ -10,31 +12,28 @@ function Homepage() {
     const [lng, setLng] = useState(-70.9);
     const [lat, setLat] = useState(42.35);
     const [zoom, setZoom] = useState(9);
+    const [categories, setCategories] = useState([])
+    const [deals, setDeals] = useState([])
 
-    // navigator.geolocation.getCurrentPosition(success, error,)
-
-    // function success(pos) {
-    //     var crd = pos.coords;
-
-    //     console.log('Your current position is:');
-    //     console.log(`Latitude : ${crd.latitude}`);
-    //     console.log(`Longitude: ${crd.longitude}`);
-    //     console.log(`More or less ${crd.accuracy} meters.`);
-    // }
-
-    // function error(err) {
-    //     console.warn(`ERROR(${err.code}): ${err.message}`);
-    // }
+    // useEffect(() => {
+    //     if (map.current) return; // initialize map only once
+    //     map.current = new mapboxgl.Map({
+    //         container: mapContainer.current,
+    //         style: 'mapbox://styles/mapbox/streets-v11',
+    //         center: [lng, lat],
+    //         zoom: zoom
+    //     });
+    // });
 
     useEffect(() => {
-        if (map.current) return; // initialize map only once
-        map.current = new mapboxgl.Map({
-            container: mapContainer.current,
-            style: 'mapbox://styles/mapbox/streets-v11',
-            center: [lng, lat],
-            zoom: zoom
-        });
-    });
+        fetch('http://localhost:3030/categories')
+            .then(response => response.json())
+            .then(data => setCategories(data.data));
+
+        fetch('http://localhost:3030/deals')
+            .then(response => response.json())
+            .then(data => setDeals(data.data));
+    }, [])
 
     return (
         <main className="homepage">
@@ -45,19 +44,20 @@ function Homepage() {
                 <div className="categories">
                     <h2 className="category-title">Categories</h2>
                     <div className="category-tiles">
-                        <div className="category-tile"> Breakfast</div>
-                        <div className="category-tile"> Juice</div>
-                        <div className="category-tile"> American</div>
-                        <div className="category-tile"> Coffee</div>
+                        {categories.map((category) => (
+                            <CategoryTile category={category} />
+                            // console.log("category inside map", category)
+                        )
+                        )}
                     </div>
                 </div>
                 <div className="best-deals">
                     <h2 className="best-deals-title"> Best Deals</h2>
                     <div className="deal-tiles">
-                        <div className="deal-tile"> Deal</div>
-                        <div className="deal-tile"> Deal</div>
-                        <div className="deal-tile"> Deal</div>
-                        <div className="deal-tile"> Deal</div>
+                        {deals.map((deal) => (
+                            <DealTile deal={deal} />
+                        )
+                        )}
                     </div>
                 </div>
             </div>
