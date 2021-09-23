@@ -2,6 +2,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import './App.css';
 import Homepage from "./pages/Homepage"
 import Header from "./pages/Header"
+import Register from "./pages/RegisterPage"
 
 function App() {
   return (
@@ -15,6 +16,9 @@ function App() {
           </Route>
           <Route path="/home">
             <Homepage />
+          </Route>
+          <Route path="/register">
+            <Register />
           </Route>
         </Switch>
       </main>
