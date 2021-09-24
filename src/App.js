@@ -4,6 +4,7 @@ import Homepage from "./pages/Homepage"
 import Header from "./pages/Header"
 import Register from "./pages/RegisterPage"
 import CafeDisplayPage from "./pages/CafeDisplayPage"
+import LoginPage from "./pages/LoginPage"
 
 function App() {
   return (
@@ -24,6 +25,9 @@ function App() {
         </Switch>
         <Route path="/cafe">
           <CafeDisplayPage />
+        </Route>
+        <Route path="/login">
+          <LoginPage />
         </Route>
       </main>
     </div>
