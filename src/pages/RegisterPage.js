@@ -10,6 +10,9 @@ export default function RegisterPage({ setCurrentUser }) {
 
     function registerUser(event) {
         const { username, password, email } = event.target
+        event.preventDefault()
+
+        console.log("hello")
 
         fetch("http://localhost:3030/users", {
             method: "POST",
@@ -27,7 +30,7 @@ export default function RegisterPage({ setCurrentUser }) {
             })
             .then(function (data) {
                 console.log(data);
-                setCurrentUser(data.id);
+                // setCurrentUser(data.id);
             });
     }
 
@@ -74,12 +77,12 @@ export default function RegisterPage({ setCurrentUser }) {
                     control={<Checkbox name="Promotions" />}
                     label="I would like to recieve promotions and updates via email"
                 />
-                <Link to="/home" style={{ textDecoration: "none" }}>
-                    <Button color="secondary" variant="contained">
-                        {" "}
-                        Register
-                    </Button>
-                </Link>
+                {/* <Link to="/home" style={{ textDecoration: "none" }}> */}
+                <Button color="secondary" variant="contained" type="submit">
+                    {" "}
+                    Register
+                </Button>
+                {/* </Link> */}
                 <Link className="link"> Already have an account? Sign in here</Link>
             </form>
         </main>
