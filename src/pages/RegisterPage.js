@@ -11,7 +11,7 @@ export default function RegisterPage({ setCurrentUser }) {
     function registerUser(event) {
         const { username, password, email } = event.target
 
-        fetch("http://localhost:4000/users", {
+        fetch("http://localhost:3030/users", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

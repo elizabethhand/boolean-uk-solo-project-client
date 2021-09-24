@@ -3,6 +3,7 @@ import './App.css';
 import Homepage from "./pages/Homepage"
 import Header from "./pages/Header"
 import Register from "./pages/RegisterPage"
+import CafeDisplayPage from "./pages/CafeDisplayPage"
 
 function App() {
   return (
@@ -21,6 +22,9 @@ function App() {
             <Register />
           </Route>
         </Switch>
+        <Route path="/cafe">
+          <CafeDisplayPage />
+        </Route>
       </main>
     </div>
   );
