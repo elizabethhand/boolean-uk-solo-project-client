@@ -18,10 +18,10 @@
   padding: 40px 0px;
 }
 
-.map-container{
-  border:solid;
-}
-
+.map-container {
+  height: 400px;
+  }
+  
 .map-display{
   width: 400px;
 }

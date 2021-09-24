@@ -1,6 +1,8 @@
 import React, { useRef, useEffect, useState } from "react"
+import 'mapbox-gl/dist/mapbox-gl.css';
 import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl';
-import mapboxgl from 'mapbox-gl';
+// eslint-disable-next-line import/no-webpack-loader-syntax
+import mapboxgl from '!mapbox-gl';
 import CategoryTile from "../components/CategoryTile"
 import DealTile from "../components/DealTile"
 
@@ -15,15 +17,30 @@ function Homepage() {
     const [categories, setCategories] = useState([])
     const [deals, setDeals] = useState([])
 
-    // useEffect(() => {
-    //     if (map.current) return; // initialize map only once
-    //     map.current = new mapboxgl.Map({
-    //         container: mapContainer.current,
-    //         style: 'mapbox://styles/mapbox/streets-v11',
-    //         center: [lng, lat],
-    //         zoom: zoom
-    //     });
-    // });
+    function success(pos) {
+        var crd = pos.coords;
+
+        console.log('Your current position is:');
+        console.log(`Latitude : ${crd.latitude}`);
+        console.log(`Longitude: ${crd.longitude}`);
+        console.log(`More or less ${crd.accuracy} meters.`);
+    }
+
+    function error(err) {
+        console.warn(`ERROR(${err.code}): ${err.message}`);
+    }
+
+    navigator.geolocation.getCurrentPosition(success, error);
+
+    useEffect(() => {
+        if (map.current) return; // initialize map only once
+        map.current = new mapboxgl.Map({
+            container: mapContainer.current,
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [lng, lat],
+            zoom: zoom
+        });
+    });
 
     useEffect(() => {
         fetch('http://localhost:3030/categories')
