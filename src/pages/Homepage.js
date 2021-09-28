@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from "react"
 import 'mapbox-gl/dist/mapbox-gl.css';
 import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl';
 // eslint-disable-next-line import/no-webpack-loader-syntax
-import mapboxgl from '!mapbox-gl';
+import mapboxgl, { GeolocateControl } from '!mapbox-gl';
 import CategoryTile from "../components/CategoryTile"
 import DealTile from "../components/DealTile"
 
@@ -17,30 +17,66 @@ function Homepage() {
     const [categories, setCategories] = useState([])
     const [deals, setDeals] = useState([])
 
+    navigator.geolocation.getCurrentPosition(success, error);
+
     function success(pos) {
         var crd = pos.coords;
-
-        console.log('Your current position is:');
-        console.log(`Latitude : ${crd.latitude}`);
-        console.log(`Longitude: ${crd.longitude}`);
-        console.log(`More or less ${crd.accuracy} meters.`);
+        console.log(crd.latitude)
+        console.log(crd.longitude)
+        setLat(crd.latitude)
+        setLng(crd.longitude)
     }
 
     function error(err) {
         console.warn(`ERROR(${err.code}): ${err.message}`);
     }
 
-    navigator.geolocation.getCurrentPosition(success, error);
+    // useEffect(() => {
+    //     if (map.current) return; // initialize map only once
+    //     map.current = new mapboxgl.Map({
+    //         container: mapContainer.current,
+    //         style: 'mapbox://styles/mapbox/streets-v11',
+    //         center: [lng, lat],
+    //         zoom: zoom
+    //     }, [lng]);
 
-    useEffect(() => {
-        if (map.current) return; // initialize map only once
-        map.current = new mapboxgl.Map({
+    //     map.addControl(
+    //         new mapboxgl.GeolocateControl({
+    //             positionOptions: {
+    //                 enableHighAccuracy: true
+    //             },
+    //             // When active the map will receive updates to the device's location as it changes.
+    //             trackUserLocation: true,
+    //             // Draw an arrow next to the location dot to indicate which direction the device is heading.
+    //             showUserHeading: true
+    //         })
+    //     );
+    // });
+
+    const getMap = () => {
+        new mapboxgl.Map({
             container: mapContainer.current,
-            style: 'mapbox://styles/mapbox/streets-v11',
-            center: [lng, lat],
-            zoom: zoom
-        });
-    });
+            style: 'mapbox://styles/mapbox/light-v9',
+            center: [7.32, 60.44],
+            zoom: 6,
+        })
+    };
+
+    const Map = () => {
+        useEffect(() => {
+            const map = getMap();
+            map.addControl(new mapboxgl.GeolocateControl({
+                positionOptions: {
+                    enableHighAccuracy: true
+                },
+                // When active the map will receive updates to the device's location as it changes.
+                trackUserLocation: true,
+                // Draw an arrow next to the location dot to indicate which direction the device is heading.
+                showUserHeading: true
+            }));
+        }, []);
+    };
+
 
     useEffect(() => {
         fetch('http://localhost:3030/categories')
@@ -63,7 +99,6 @@ function Homepage() {
                     <div className="category-tiles">
                         {categories.map((category) => (
                             <CategoryTile category={category} />
-                            // console.log("category inside map", category)
                         )
                         )}
                     </div>

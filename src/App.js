@@ -23,7 +23,7 @@ function App() {
             <Register />
           </Route>
         </Switch>
-        <Route path="/cafe">
+        <Route path="/cafe/:id">
           <CafeDisplayPage />
         </Route>
         <Route path="/login">
